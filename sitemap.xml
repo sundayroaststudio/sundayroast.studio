@@ -1,11 +1,2 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://www.sundayroast.studio/</loc></url>
-<url><loc>https://www.sundayroast.studio/projects.html</loc></url>
-<url><loc>https://www.sundayroast.studio/about.html</loc></url>
-<url><loc>https://www.sundayroast.studio/contact.html</loc></url>
-<url><loc>https://www.sundayroast.studio/brand-foundations.html</loc></url>
-<url><loc>https://www.sundayroast.studio/brand-strategy.html</loc></url>
-<url><loc>https://www.sundayroast.studio/marketing-roadmap.html</loc></url>
-<url><loc>https://www.sundayroast.studio/sales-systems.html</loc></url>
-</urlset>
+<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url><loc>https://www.sundayroast.studio/</loc></url><url><loc>https://www.sundayroast.studio/projects/</loc></url><url><loc>https://www.sundayroast.studio/services/</loc></url><url><loc>https://www.sundayroast.studio/about/</loc></url><url><loc>https://www.sundayroast.studio/contact/</loc></url></urlset>

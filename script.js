@@ -1,1 +1,4 @@
-const button=document.querySelector('.menu-button');const nav=document.querySelector('.nav');if(button&&nav){button.addEventListener('click',()=>{const open=nav.classList.toggle('open');button.setAttribute('aria-expanded',open)})}
+
+const menu=document.querySelector('.menu');
+const nav=document.querySelector('.nav');
+if(menu&&nav){menu.addEventListener('click',()=>{nav.classList.toggle('open');menu.setAttribute('aria-expanded',nav.classList.contains('open'))})}

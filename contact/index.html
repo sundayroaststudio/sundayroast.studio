@@ -166,16 +166,22 @@ html,body{background:#e9e9e9}
 
 <script>
 (function(){
-var URL='https://script.google.com/macros/s/AKfycbwHXhXLxD1Dm3WxfWR0a7dogT3szOnAiWMqBlfGbxji5mnn1DP3H1obhnrOm_Sr4r01/exec';
+var URL='https://script.google.com/macros/s/AKfycbzO5U25x6KKLtdwrN0o0nT5am8PDCGlsZlTV6Nr_Yhez_MGMS97QNjprpcP9Hn2h01j/exec';
 var f=document.getElementById('f'),ok=document.getElementById('ok'),btn=f.querySelector('button[type=submit]');
+var FAIL='/something went wrong. Please email hello@sundayroast.studio';
 f.addEventListener('submit',function(e){
   e.preventDefault();
   if(!f.reportValidity())return;
   var data={};new FormData(f).forEach(function(v,k){data[k]=String(v).trim();});
-  btn.disabled=true;btn.textContent='Sending...';
-  fetch(URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)})
-  .then(function(){ok.textContent='/request received';ok.hidden=false;f.reset();})
-  .catch(function(){ok.textContent='/something went wrong. Please email hello@sundayroast.studio';ok.hidden=false;})
+  btn.disabled=true;btn.textContent='Sending...';ok.hidden=true;
+  fetch(URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)})
+  .then(function(res){return res.json();})
+  .then(function(d){
+    if(d&&d.result==='success'){ok.textContent='/request received';f.reset();}
+    else{ok.textContent=FAIL;if(d&&d.error)console.error('Form error:',d.error);}
+    ok.hidden=false;
+  })
+  .catch(function(err){console.error(err);ok.textContent=FAIL;ok.hidden=false;})
   .then(function(){btn.disabled=false;btn.textContent='Send';});
 });
 })();

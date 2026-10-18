@@ -149,5 +149,50 @@ html,body{background:#e9e9e9}
 </footer>
 </div>
 
+<style id="sr-mobile">
+.sr-burger,.sr-top{display:none}
+@media(max-width:640px){
+.sr-burger,.sr-top{display:flex;box-sizing:border-box;position:fixed;z-index:200;width:44px;height:44px;align-items:center;justify-content:center;background:#e9e9e9;border:1px solid #141413;border-radius:50%;padding:0;margin:0;cursor:pointer;color:#141413;-webkit-tap-highlight-color:transparent}
+.sr-burger{top:32px;right:9px;flex-direction:column;gap:5px}
+.sr-burger span{display:block;width:20px;height:1.5px;background:#141413;transition:transform .25s ease,opacity .2s ease}
+html.sr-open .sr-burger span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+html.sr-open .sr-burger span:nth-child(2){opacity:0}
+html.sr-open .sr-burger span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.sr-top{bottom:calc(20px + env(safe-area-inset-bottom,0px));right:9px;font:400 20px/1 "Hanken Grotesk",system-ui,sans-serif;text-decoration:none}
+.sr-hide-m{display:none!important}
+nav.sr-mnav{display:none!important}
+html.sr-open{overflow:hidden}
+html.sr-open nav.sr-mnav{display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;align-items:flex-start!important;justify-content:flex-start!important;gap:4px!important;position:fixed!important;inset:0;z-index:150;background:#e9e9e9;padding:104px 20px 40px!important;overflow-y:auto;font-size:40px!important}
+html.sr-open nav.sr-mnav>a,html.sr-open nav.sr-mnav .dd>a,html.sr-open nav.sr-mnav .sr-dd>a{font:400 40px/1.2 "Canela Condensed",Georgia,serif!important;min-height:56px!important;border-bottom:0!important;padding:0!important;display:flex!important;align-items:center!important}
+html.sr-open nav.sr-mnav a[aria-current]{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1px}
+html.sr-open nav.sr-mnav>a::after,html.sr-open nav.sr-mnav>.dd>a::after,html.sr-open nav.sr-mnav>.sr-dd>a::after{display:none}
+html.sr-open nav.sr-mnav .dd,html.sr-open nav.sr-mnav .sr-dd{position:static;display:block;width:100%}
+html.sr-open nav.sr-mnav .dd-menu,html.sr-open nav.sr-mnav .sr-dd-menu{display:block!important;position:static!important;min-width:0!important;padding:0 0 12px 0!important;background:transparent!important}
+html.sr-open nav.sr-mnav .dd-menu a,html.sr-open nav.sr-mnav .sr-dd-menu a{display:flex!important;align-items:center!important;min-height:44px!important;padding:0!important;font:400 18px/1.4 "Hanken Grotesk",system-ui,sans-serif!important;border:0!important;color:#141413!important;white-space:normal!important}
+}
+@media(prefers-reduced-motion:reduce){.sr-burger span{transition:none}}
+</style>
+<script id="sr-mobile-js">
+(function(){
+var h=document.querySelector('header'),n=h&&h.querySelector('nav');
+if(!n)return;
+var root=document.documentElement;
+n.id='sr-nav';n.classList.add('sr-mnav');
+var b=document.createElement('button');
+b.type='button';b.className='sr-burger';b.setAttribute('aria-label','Open menu');b.setAttribute('aria-expanded','false');b.setAttribute('aria-controls','sr-nav');
+b.innerHTML='<span></span><span></span><span></span>';
+document.body.appendChild(b);
+function set(open){root.classList.toggle('sr-open',open);b.setAttribute('aria-expanded',open?'true':'false');b.setAttribute('aria-label',open?'Close menu':'Open menu');}
+b.addEventListener('click',function(){set(!root.classList.contains('sr-open'));});
+n.addEventListener('click',function(e){if(e.target.closest('a'))set(false);});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
+window.addEventListener('resize',function(){if(window.innerWidth>640)set(false);});
+var t=document.createElement('a');
+t.className='sr-top';t.href='#';t.setAttribute('aria-label','Back to top');t.innerHTML='<span aria-hidden="true">&uarr;</span>';
+t.addEventListener('click',function(e){e.preventDefault();set(false);var rm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,behavior:rm?'auto':'smooth'});});
+document.body.appendChild(t);
+document.querySelectorAll('footer a').forEach(function(a){if(/^\s*Back to top/.test(a.textContent))a.classList.add('sr-hide-m');});
+})();
+</script>
 </body>
 </html>

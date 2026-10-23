@@ -179,6 +179,7 @@ f.addEventListener('submit',function(e){
     var v=el.value.trim(),msg='';
     if(!v)msg='Please fill in this field.';
     else if(el.name==='website'&&!/^(https?:\/\/)?[^\s.\/]+\.[^\s]+$/i.test(v))msg='Please enter a website, for example yourcompany.com';
+    else if(el.name==='name'&&!/\S\s+\S/.test(v))msg='Please enter your first and last name.';
     el.setCustomValidity(msg);
   });
   if(!f.reportValidity())return;

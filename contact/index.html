@@ -184,7 +184,7 @@ f.addEventListener('submit',function(e){
     el.setCustomValidity(msg);
   });
   if(!f.reportValidity())return;
-  var data={};new FormData(f).forEach(function(v,k){data[k]=String(v).trim();});data.ms=Date.now()-t0;data.role=data.teamSize;
+  var data={};new FormData(f).forEach(function(v,k){data[k]=String(v).trim();});data.ms=Date.now()-t0;
   btn.disabled=true;btn.textContent='Sending...';ok.hidden=true;
   fetch(URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)})
   .then(function(res){return res.json();})

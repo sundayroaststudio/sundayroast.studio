@@ -23,7 +23,7 @@ body{margin:0}
 a{color:#141413;text-decoration:none}
 nav.main a:hover,nav.main a:focus-visible{color:#141413}
 nav.main>a:hover,nav.main>a:focus-visible,nav.main>.dd>a:hover,nav.main>.dd>a:focus-visible{border-bottom:1px solid var(--ink)}
-.dd-menu a:hover,.dd-menu a:focus-visible{border-bottom-color:currentColor}
+nav.main .dd-menu a:hover,nav.main .dd-menu a:focus-visible{border-bottom-color:currentColor}
 .wrap{max-width:1280px;margin:0 auto;padding:0 40px}
 .serif{font-family:"Canela Condensed",Georgia,serif;font-weight:400}
 .mono{font-family:"DM Mono",ui-monospace,monospace}
@@ -90,7 +90,7 @@ footer.site .wrap{display:flex;flex-direction:column;gap:40px}
 .dd{position:relative}
 .dd-menu{display:none;position:absolute;top:100%;left:-20px;min-width:240px;padding:12px 0;background:var(--ground);z-index:20}
 .dd:hover .dd-menu,.dd:focus-within .dd-menu{display:block}
-.dd-menu a{display:flex;position:relative;width:fit-content;align-items:center;min-height:34px;margin:5px 20px;padding:0;border-bottom:1px solid transparent;white-space:nowrap}.dd-menu a::after{content:"";position:absolute;left:-20px;right:-20px;top:-5px;bottom:-5px}
+nav.main .dd-menu a{display:flex;box-sizing:border-box;position:relative;width:fit-content;align-items:center;min-height:34px;margin:5px 20px;padding:0;border-bottom:1px solid transparent;white-space:nowrap}nav.main .dd-menu a::after{content:"";position:absolute;left:-20px;right:-20px;top:-5px;bottom:-5px}
 .fcol{display:flex;flex-direction:column;gap:0;line-height:1.6}.fcol a{display:inline-flex;align-items:center;min-height:44px}.totop{display:inline-flex;align-items:center;min-height:44px}
 .logos{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;column-gap:100px;margin-top:16px}
 .logocell{display:flex;align-items:center;justify-content:flex-start;min-height:160px;padding:24px 0}

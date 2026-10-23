@@ -87,7 +87,7 @@ footer.site .wrap{display:flex;flex-direction:column;gap:40px}
 .form label{display:flex;flex-direction:column;gap:8px;font-family:"Hanken Grotesk",system-ui,sans-serif;font-size:18px;line-height:1.6}
 .form h6{margin:0;font-family:"Canela Condensed",Georgia,serif;font-weight:400;font-size:24px;line-height:1.2}
 .form input,.form textarea{font:400 18px/1.4 "Hanken Grotesk",system-ui,sans-serif;color:#141413;background:transparent;border:1px solid var(--ink);padding:12px 14px;border-radius:12px;width:100%;box-sizing:border-box;resize:vertical}
-.form input:focus,.form textarea:focus{outline:2px solid var(--ink);outline-offset:2px}
+.form select{font:400 18px/1.4 "Hanken Grotesk",system-ui,sans-serif;color:#141413;background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 8'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23141413' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 16px center/14px 8px;border:1px solid var(--ink);padding:12px 44px 12px 14px;border-radius:12px;width:100%;box-sizing:border-box;-webkit-appearance:none;appearance:none;cursor:pointer}.form select:invalid{color:rgba(20,20,19,.55)}.form select option{color:#141413}.form input:focus,.form textarea:focus,.form select:focus{outline:2px solid var(--ink);outline-offset:2px}
 .dd{position:relative}
 .dd-menu{display:none;position:absolute;top:100%;left:-20px;min-width:240px;padding:12px 0;background:var(--ground);z-index:20}
 .dd:hover .dd-menu,.dd:focus-within .dd-menu{display:block}
@@ -147,9 +147,8 @@ html,body{background:#e9e9e9}
 <form id="f" class="form" novalidate="">
 <label><h6 style="font-size: 18px; font-family: Hanken Grotesk">Full Name</h6><input name="name" required="" autocomplete="name"></label>
 <div class="form-pair"><label><h6 style="font-size: 18px; font-family: Hanken Grotesk">Company Name</h6><input name="company" required="" autocomplete="organization"></label><label><h6 style="font-size: 18px; font-family: Hanken Grotesk">Company Website</h6><input name="website" type="text" inputmode="url" required="" autocomplete="url"></label></div>
-<label><h6 style="font-family: Hanken Grotesk; font-size: 18px">Role</h6><input name="role" required="" autocomplete="organization-title"></label>
-<label><h6 style="font-size: 18px; font-family: Hanken Grotesk">Work Email</h6><input name="email" type="email" required="" autocomplete="email"></label>
-<label><h6 style="font-size: 18px; font-family: Hanken Grotesk">Tell us about the situation you want to resolve (scope, timeline, budget)</h6><textarea name="message" rows="6" required=""></textarea></label>
+<div class="form-pair"><label><h6 style="font-size: 18px; font-family: Hanken Grotesk">Work Email</h6><input name="email" type="email" required="" autocomplete="email"></label><label><h6 style="font-size: 18px; font-family: Hanken Grotesk">Team Size</h6><select name="teamSize" required=""><option value="" selected="" disabled="">Select</option><option>1</option><option>2-10</option><option>11-40</option><option>41-100</option><option>100+</option></select></label></div>
+<label><h6 style="font-size: 18px; font-family: Hanken Grotesk">Tell us about the situation you want to resolve.</h6><textarea name="message" rows="6" required=""></textarea></label>
 <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden"><label>Leave this field empty<input name="fax" tabindex="-1" autocomplete="off"></label></div>
 <p id="ok" class="mono" hidden="">/request received</p><button type="submit" style="align-self: flex-start; background: none; border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; padding: 30px 0 3.9px; color: #141413; cursor: pointer; font: inherit; font-size: 16px; min-height: 44px; box-sizing: border-box">Send</button>
 </form></div></section></div>
@@ -174,7 +173,7 @@ var FAIL='/something went wrong. Please email hello@sundayroast.studio';
 var t0=Date.now();
 f.addEventListener('submit',function(e){
   e.preventDefault();
-  f.querySelectorAll('input,textarea').forEach(function(el){
+  f.querySelectorAll('input,textarea,select').forEach(function(el){
     if(el.name==='fax')return;
     var v=el.value.trim(),msg='';
     if(!v)msg='Please fill in this field.';
@@ -183,7 +182,7 @@ f.addEventListener('submit',function(e){
     el.setCustomValidity(msg);
   });
   if(!f.reportValidity())return;
-  var data={};new FormData(f).forEach(function(v,k){data[k]=String(v).trim();});data.ms=Date.now()-t0;
+  var data={};new FormData(f).forEach(function(v,k){data[k]=String(v).trim();});data.ms=Date.now()-t0;data.role=data.teamSize;
   btn.disabled=true;btn.textContent='Sending...';ok.hidden=true;
   fetch(URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)})
   .then(function(res){return res.json();})

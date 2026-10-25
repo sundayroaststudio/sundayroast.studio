@@ -1,0 +1,19 @@
+# Cache rules for Netlify. GitHub Pages ignores this file.
+# Pages (HTML) are left on Netlify's default so edits show up straight away.
+# Assets are cached for a week (604800 seconds). If a file keeps its name
+# when you replace it, visitors may see the old copy for up to a week.
+
+/assets/*
+  Cache-Control: public, max-age=604800
+
+/favicon.ico
+  Cache-Control: public, max-age=604800
+
+/favicon.png
+  Cache-Control: public, max-age=604800
+
+/favicon.svg
+  Cache-Control: public, max-age=604800
+
+/apple-touch-icon.png
+  Cache-Control: public, max-age=604800

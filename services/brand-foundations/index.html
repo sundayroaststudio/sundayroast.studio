@@ -186,5 +186,15 @@ paint();
 document.querySelectorAll('footer a').forEach(function(a){if(/^\s*Back to top/.test(a.textContent))a.classList.add('sr-hide-m');});
 })();
 </script>
+<script>
+(function(){var mq=window.matchMedia("(max-width:819px)");
+function fit(){var ps=document.querySelectorAll(".sr-stages>div>p");
+ps.forEach(function(p){p.style.removeProperty("width");p.style.removeProperty("margin-left");p.style.removeProperty("margin-right")});
+if(!mq.matches)return;
+ps.forEach(function(p){var r=document.createRange();r.selectNodeContents(p);var rs=[].slice.call(r.getClientRects());if(!rs.length)return;
+var L=Math.min.apply(null,rs.map(function(x){return x.left})),R=Math.max.apply(null,rs.map(function(x){return x.right}));
+p.style.width=((R-L)+0.3)+"px";p.style.marginLeft="auto";p.style.marginRight="auto"})}
+fit();window.addEventListener("resize",fit);window.addEventListener("load",fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit)})();
+</script>
 </body>
 </html>
